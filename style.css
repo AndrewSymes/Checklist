@@ -1,25 +1,11 @@
-#container {}
-.check {
-    border: none;
-    padding: 2px;
+.checklist-div {
     display: flex;
-    flex-direction: row;
 }
-.check button {
-    border: thin solid black;
-    background-color: white;
-    width: 25px;
-    height: 25px;
+.checkbox {
+    height: 3.8rem;
+    width: 3.8rem;
+    margin-right: .5rem;
 }
-.check input {
-    width: 100vw;
-    border: none;
-    padding: 0;
-    margin: 0;
-    margin-left: 10px;
-    height: 25px;
-    font-size: 25px;
-}
-.check .checked {
-    background-color: black;
+.text-input {
+    width: 100%;
 }

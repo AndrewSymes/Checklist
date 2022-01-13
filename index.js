@@ -44,7 +44,7 @@ class CheckList extends React.Component {
         return (
             React.createElement("div", {},
                 this.state.list.map((item, i) => {
-                    return React.createElement(ChecklistItem, { key: item.key, id: i, item: item, toggleItem: this.toggleItem, updateContent: this.updateContent, deleteItem: this.deleteItem })
+                    return React.createElement(ChecklistItem, { key: item.key, index: i, item: item, toggleItem: this.toggleItem, updateContent: this.updateContent, deleteItem: this.deleteItem })
                 }),
                 React.createElement("button", { className: "add-item", onClick: this.addItem }, "add")
             )
@@ -52,22 +52,22 @@ class CheckList extends React.Component {
     }
 }
 
-function ChecklistItem({ item, id, toggleItem, updateContent, deleteItem }) {
+function ChecklistItem({ item, index, toggleItem, updateContent, deleteItem }) {
     function handleClick() {
-        toggleItem(id)
+        toggleItem(index)
     }
 
     function handleTextInput() {
-        updateContent(id)
+        updateContent(index)
     }
 
     function deleteSelf() {
-        deleteItem(id)
+        deleteItem(index)
     }
 
     return React.createElement("div", { className: "checklist-div" },
         React.createElement("input", { type: "checkbox", className: "checkbox", defaultChecked: item.checked, onClick: () => { handleClick() } }),
-        React.createElement("input", { type: "text", className: "text-input", value: item.content, id: id, onChange: () => { handleTextInput() } }),
+        React.createElement("input", { type: "text", className: "text-input", value: item.content, id: index, onChange: () => { handleTextInput() } }),
         React.createElement("button", { className: "button-outline", onClick: () => { deleteSelf() } }, "remove")
     )
 }

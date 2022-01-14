@@ -19,9 +19,9 @@ class CheckList extends React.Component {
         this.saveItems(copy)
     }
 
-    updateContent = (id) => {
+    updateContent = (e, id) => {
         var copy = [...this.state.list]
-        var content = document.querySelector("input[id='" + id + "']").value
+        var content = e.target.value
         copy[id].content = content
         this.setState({ list: copy })
         this.saveItems(copy)
@@ -35,7 +35,11 @@ class CheckList extends React.Component {
     }
 
     addItem = () => {
-        var newList = [...this.state.list, { checked: false, content: "", key: uuidv4() }]
+        var newList = [...this.state.list, {
+            checked: false,
+            content: "",
+            key: uuidv4()
+        }]
         this.setState({ list: newList })
         this.saveItems(newList)
     }
@@ -44,31 +48,57 @@ class CheckList extends React.Component {
         return (
             React.createElement("div", { className: "checklist" },
                 this.state.list.map((item, i) => {
-                    return React.createElement(ChecklistItem, { key: item.key, index: i, item: item, toggleItem: this.toggleItem, updateContent: this.updateContent, deleteItem: this.deleteItem })
+                    return React.createElement(ChecklistItem, {
+                        item: item,
+                        key: item.key,
+                        index: i,
+                        toggleItem: this.toggleItem,
+                        updateContent: this.updateContent,
+                        deleteItem: this.deleteItem
+                    })
                 }),
-                React.createElement("button", { className: "add-item", onClick: this.addItem }, "add")
+                React.createElement("button", {
+                        className: "add-item",
+                        onClick: this.addItem
+                    },
+                    "add")
             )
         )
     }
 }
 
-function ChecklistItem({ item, index, toggleItem, updateContent, deleteItem }) {
+function ChecklistItem(props) {
     function handleClick() {
-        toggleItem(index)
+        props.toggleItem(props.index)
     }
 
-    function handleTextInput() {
-        updateContent(index)
+    function handleTextInput(e) {
+        props.updateContent(e, props.index)
     }
 
     function deleteSelf() {
-        deleteItem(index)
+        props.deleteItem(props.index)
     }
 
     return React.createElement("div", { className: "checklist-item" },
-        React.createElement("input", { type: "checkbox", className: "checkbox", defaultChecked: item.checked, onClick: () => { handleClick() } }),
-        React.createElement("input", { type: "text", className: "text-input", value: item.content, id: index, onChange: () => { handleTextInput() } }),
-        React.createElement("button", { className: "button-outline", onClick: () => { deleteSelf() } }, "remove")
+        React.createElement("input", {
+            type: "checkbox",
+            className: "checkbox",
+            defaultChecked: props.item.checked,
+            onClick: () => { handleClick() }
+        }),
+        React.createElement("input", {
+            type: "text",
+            className: "text-input",
+            value: props.item.content,
+            id: props.index,
+            onChange: (e) => { handleTextInput(e) }
+        }),
+        React.createElement("button", {
+                className: "button-outline",
+                onClick: () => { deleteSelf() }
+            },
+            "remove")
     )
 }
 

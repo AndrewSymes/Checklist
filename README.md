@@ -5,6 +5,8 @@
 
 Uses html, css, and Javascript with React.
 
+[Wireframe](https://github.com/AndrewSymes/Checklist/blob/main/wireframe.jpg)
+
 User stories:
 
 As a film director, I want to create a checklist of scenes to film, **SO THAT** I can keep track of what scenes have been filmed.

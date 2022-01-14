@@ -1,7 +1,6 @@
 # Checklist
 
 ## A checklist app inspired by Adam Savage.
-
 ## This site is hosted on [GitHub Pages](https://andrewsymes.github.io/Checklist/)
 
 Uses html, css, and Javascript with React.

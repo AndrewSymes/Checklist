@@ -42,7 +42,7 @@ class CheckList extends React.Component {
 
     render() {
         return (
-            React.createElement("div", {},
+            React.createElement("div", { className: "checklist" },
                 this.state.list.map((item, i) => {
                     return React.createElement(ChecklistItem, { key: item.key, index: i, item: item, toggleItem: this.toggleItem, updateContent: this.updateContent, deleteItem: this.deleteItem })
                 }),
@@ -65,7 +65,7 @@ function ChecklistItem({ item, index, toggleItem, updateContent, deleteItem }) {
         deleteItem(index)
     }
 
-    return React.createElement("div", { className: "checklist-div" },
+    return React.createElement("div", { className: "checklist-item" },
         React.createElement("input", { type: "checkbox", className: "checkbox", defaultChecked: item.checked, onClick: () => { handleClick() } }),
         React.createElement("input", { type: "text", className: "text-input", value: item.content, id: index, onChange: () => { handleTextInput() } }),
         React.createElement("button", { className: "button-outline", onClick: () => { deleteSelf() } }, "remove")

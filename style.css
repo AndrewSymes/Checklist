@@ -1,4 +1,12 @@
-.checklist-div {
+#container {
+    display: flex;
+    justify-content: center;
+}
+.checklist {
+    justify-content: center;
+    width: 75%;
+}
+.checklist-item {
     display: flex;
 }
 .checkbox {

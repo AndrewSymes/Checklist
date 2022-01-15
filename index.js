@@ -23,8 +23,10 @@ class CheckList extends React.Component {
         var copy = [...this.state.list]
         var content = e.target.value
         copy[id].content = content
+        copy[id].height = e.target.value != "" ? (e.target.scrollHeight) + "px" : "0px"
         this.setState({ list: copy })
         this.saveItems(copy)
+
     }
 
     toggleItem = (id) => {
@@ -38,7 +40,8 @@ class CheckList extends React.Component {
         var newList = [...this.state.list, {
             checked: false,
             content: "",
-            key: uuidv4()
+            key: uuidv4(),
+            height: ""
         }]
         this.setState({ list: newList })
         this.saveItems(newList)
@@ -87,12 +90,13 @@ function ChecklistItem(props) {
             defaultChecked: props.item.checked,
             onClick: () => { handleClick() }
         }),
-        React.createElement("input", {
-            type: "text",
-            className: "text-input",
+        React.createElement("textarea", {
+            style: { height: props.item.height },
             value: props.item.content,
+            rows: 1,
+            className: "text-input",
             id: props.index,
-            onChange: (e) => { handleTextInput(e) }
+            onInput: (e) => { handleTextInput(e) }
         }),
         React.createElement("button", {
                 className: "button-outline",
